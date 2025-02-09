@@ -185,6 +185,24 @@ if not input_invalid:
     print("    |    The monster's combat strength is now " + str(
         m_combat_strength) + " using the " + power_roll + " magic power")
 
+    # Q5: Roll to see who strikes first
+    print("Rolling to determine who strikes first...")
+    attack_roll = random.choice([1, 2, 3, 4, 5, 6])
+    print(f"Attack roll: {attack_roll}")
+
+    if attack_roll in [1, 3, 5]:
+        print("The Hero strikes first!")
+        m_health_points = functions_lab05.hero_attacks(combat_strength, m_health_points)
+        if m_health_points > 0:  # if monster is still alive, it strikes back
+            print("The Monster strikes back!")
+            health_points = functions_lab05.monster_attacks(m_combat_strength, health_points)
+    elif attack_roll in [2, 4, 6]:
+        print("The Monster strikes first!")
+        health_points = functions_lab05.monster_attacks(m_combat_strength, health_points)
+        if health_points > 0:  # if hero is still alive, it strikes back
+            print("The Hero strikes back!")
+            m_health_points = functions_lab05.hero_attacks(combat_strength, m_health_points)
+
     # Q6: Inception Dream
     crazy_level = functions_lab05.inception_dream(5)
     health_points -= 1
